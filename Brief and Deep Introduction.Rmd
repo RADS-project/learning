@@ -1,0 +1,309 @@
+---
+title: "R: A Deep and Brief Introduction"
+author: "Dr. Pierre Balayé"
+date: "22/11/2020"
+output: rmdformats::material
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+
+# REPL
+
+Dans RStudio, vous trouverez la console. Elle se matérialise par une ligne
+commançant par un chevron `>` et qui attend que vous frappiez quelque chose au
+clavier. C'est une boucle qui fonctionne ainsi :
+
++ Read
++ Eval
++ Print
+
+On l'appelle donc la Read-Eval-Print Loop (REPL).
+
+Elle lit ce que vous tapez, l'évalue et affiche le résultat.
+
+Vous pouvez utiliser la console comme une calculatrice :
+
+```{r}
+> 3 + 4
+[1] 7
+```
+
+Le `[1]` signifie que le résultat est un vecteur et que l'élément qui débute la
+ligne (ici `7`) est le premier.
+
+Nous reviendrons sur cette notion de vecteur. C'est un objet qui contient
+plusieurs éléments du même type.
+
+Pour comprendre la notation `[1]` examinez la variable `letters` qui est un vecteur
+de 26 éléments.
+
+```{r}
+> letters
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y"
+[26] "z"
+```
+
+Une variable est un symbole qui associe un nom à une valeur. La variable `letters` est associée 
+aux lettres de l'alphabet en minuscules.
+
+Pour définir une variable dans **R** on utilise l'opérateur d'assignement `<-`.
+Attention il est constitué de 2 caractères `<` et `-`.
+
+```{r}
+> total <- 3 + 4 + 8 + 9
+```
+
+L'assignememt est une opération silencieuse. La REPL n'affiche donc rien.
+Cependant, vous pouvez afficher la valeur de total en lui demandant d'évaluer la
+variable :
+
+```{r}
+> total
+[1] 24
+```
+
+Vous pouvez également parenthèser l'assignement. Cela peut être utile pour vérifier la bonne
+marche de vos programmes.
+
+```{r}
+> (total <- 3 + 4 + 8 + 9)
+[1] 24
+```
+
+Dans **R** on peut utiliser (et définir) des fonctions. Pour cela on utilise des 
+parenthèses. Utilisez la fonction `sin` et la variable prédéfinie `pi` pour calculer 
+$\sin\dfrac{\pi}{4}$.
+
+Vous pouvez obtenir de l'aide sur une fonction en utlisant la fonction `help`.
+
+```{r}
+> help(sin)
+```
+
+Parcourez cette aide pour trouver quelle fonction s'apparente à la fonction mathématque $x\to\arctan(x)$.
+
+Consultez l'aide de la fonction `sqrt` puis vérifiez que $\sin\dfrac{\pi}{4}=\dfrac{\sqrt{2}}{2}$.
+
+# Fichiers de scripts
+
+Un fichier de script **R** un fichier de texte dont le nom est de la forme `un_script.R`.
+C'est-à-dire que l'extension est de la forme `.R`.
+
+Créez un nouveau fichier de script et sauvegardez le (`<CTRL>+<SHIFT>+N` puis `<CTRL>+S`). 
+
+Dedans, insérez les instructions suivantes.
+
+```{r}
+x <- sin(pi/4)
+y <- sqrt(2)/2
+x - y
+```
+
+En plaçant le curseur au niveau de chacune des lignes vous les envoyer se faire evaluer vers la console en utilisant `<CTRL>+<ENTER>`.
+
+Les algorithmes associés aux fonctions `sin` et `sqrt` ainsi que la précision limitée de la partie décimale des nombres en machine fait que les variables `x` et `y` ont des valeurs légerement différentes et R.
+
+Une remarque le test logique pour vérifier si $x$ et $y$ sont égaux s'écrit ainsi `==`.
+
+```{r}
+> x == y
+[1] FALSE
+```
+
+Un seul signe égal `=` équivaut à l'assignement `<-` ! Tentez de comprendre ce qui se passe ici :
+
+```{r}
+> x = y
+> x == y
+[1] TRUE
+```
+
+Pour executer l'ensemble d'un script vous pouvez le `source`. Placez vous quelque part dans le script créé précedemment puis faîtes `<CTRL>+<SHIFT>+S`.
+
+Vous pouvez retester l'égalité entre $x$ et $y$ pour vous convaincre que le script a bien été executé. Vous pouvez faire `<CTRL>+<SHIFT>+<ENTER>` pour voir une exécution avec affichage de toutes les évaluations sur la console.
+
+# Packages
+
+Un ensemble de fonctions utiles autour d'un même sujet sont regroupées en package.
+
+Un package doit être tout d'abord installé sur votre ordinateur. **R** utilise un dépot de packages officiels abrités par le (https://cran.r-project.org/web/packages/index.html). Depuis la console, vous pouvez directement installer un package.
+
+```{r}
+> install.packages("lobstr")
+```
+
+Le package `lobstr` sert à examiner le détail des structures de données.
+
+Installez les packages suivants :
+
++ Le package `rlang` donne des outils de métaprogrammation.
++ Le package `purrr` donne des outils de programmation fonctionnelle.
+
+Si l'installation d'un package n'est à faire qu'une seule fois par machine, pour utiliser un package, il faudra le charger en mémoire au début de chaque session **R**. Au début d'un script, vous devez ajouter :
+
+```{r}
+library(purrr)
+library(rlang)
+library(lobstr)
+```
+
+pour utiliser ces packages dans votre code.
+
+La fonction `help` permet d'accèder à la documentation de ces packages.
+
+# Vecteurs
+
+Les vecteurs sont une suite d'objets de même type.
+
+Les 4 types de bases sont :
+
++ logical
++ integer
++ numeric
++ character
+
+Pour créer un vecteur on utilise la fonction `c` :
+
+```{r}
+(booleens <- c(TRUE, FALSE, TRUE))
+(entiers <- c(5L, 7L, 9L))
+(decimaux <- c(1, pi, sqrt(2)))
+(chaines <- c("A", "asdf", "Elle a dit \"incroyable\""))
+```
+
+Pour accèder aux éléments d'un vecteur on utilise les crochets. On peut donner une position ou un vecteur de positions :
+
+```{r}
+> booleens[1]
+[1] TRUE
+> entiers[c(3, 1)]
+[1] 9 5
+> decimaux[-3]
+[1] 1.000000 3.141593
+> cat(chaines[-c(1, 2)])
+Elle a dit "incroyable"
+```
+On peut même utiliser un vecteur de booléens :
+
+```{r}
+> decimaux[booleens]
+[1] 1.000000 1.414214
+```
+
+Si vous modifiez un élément d'un vecteur avec un élément d'un type différent, il y aura une conversion de type de l'élément si c'est possible et sinon du vecteur. Examinez les exemples suivants :
+
+```{r}
+> booleens[3] <- 7L
+> booleens
+[1] 1 0 7
+> booleens[1] <- "RADS"
+> booleens
+[1] "RADS" "0"    "7"   
+```
+
+# Copy on modify (vector)
+
+Lorsque vous modifiez un vecteur il est copié à une nouvelle adresse mémoire. Ce procédé hérité d'une logique de programmation fonctionnelle est à connaitre si vous voulez écrire des programmes **R** dont les performances restent acceptables.
+
+Nous allons utiliser la fonction `ref` du package `lobstr`. Elle permet d'examiner l'adresse mémoire à laquelle est sotckée la valeur associée à une variable.
+
+```{r}
+> (x <- 5:10)
+[1]  5  6  7  8  9 10
+> lobstr::ref(x)
+[1:0x18b448c6378] <int> 
+> x[1] <- 3L
+> lobstr::ref(x)
+[1:0x18b46655d30] <int> 
+```
+Dans cet exemple, vous voyez que l'adresse de `x` a été modifée. En fait, une copie a été réalisée.
+
+Examinons ce qu'il se passe quand vous copiez le contenu d'une variable dans une autre variable :
+
+```{r}
+> library(lobstr)
+> (x <- 5:10)
+[1]  5  6  7  8  9 10
+> (y <- x)
+[1]  5  6  7  8  9 10
+> ref(x)
+[1:0x18b461e2518] <int> 
+> ref(y)
+[1:0x18b461e2518] <int> 
+> y[1] <- 3L
+> ref(x)
+[1:0x18b461e2518] <int> 
+> ref(y)
+[1:0x18b45ac4f98] <int>
+```
+C'est seulement quand vous modifiez `y` que la copie est réalisée.
+
+# Matrices
+
+Pour créer une matrice nous allons utiliser une fonction dont les paramètres sont nommés. Examinez l'aide de la fonction `matrix`.
+
+```{r}
+> (m <- matrix(data = 1:12, ncol = 3))
+     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    2    6   10
+[3,]    3    7   11
+[4,]    4    8   12
+```
+
+Pour accèder aux éléments d'une matrice, on utilise encore les crochets :
+
+```{r}
+> m[4, 2]
+[1] 8
+```
+
+On peut aussi utiliser des vecteurs d'entiers et de booléens :
+
+```{r}
+> m[c(TRUE, FALSE, TRUE, FALSE), -2]
+     [,1] [,2]
+[1,]    1    9
+[2,]    3   11
+```
+ 
+ En fait une matrice est un vecteur possédant un attribut `dim`.
+ 
+```{r}
+> attributes(m)
+$dim
+[1] 4 3
+```
+ 
+Vous pouvez modifier un attribut de la manière suivante :
+
+```{r}
+> attr(m, "dim") <- c(3, 4)
+> m
+     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12
+```
+
+# Listes
+
+# Data frame
+
+# Call by value
+
+# Metaprogramming
+
+# Copy on modify (data.frame)
+ 
+# Le package data.table
+
+# Microbenchmark
+
+Nous allons utiliser le package `microbenchmark`.
+
+Il vous faut l'installer, puis le charger en début de session.
+

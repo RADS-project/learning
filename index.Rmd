@@ -1,0 +1,9 @@
+---
+title: "RADS Project"
+date: "07/12/2020"
+output: rmdformats::material
+---
+
+# Index
+
+* [R: A Deep and Brief Introduction](/Brief-and-Deep-Introduction.html)
