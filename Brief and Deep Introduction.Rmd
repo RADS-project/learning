@@ -291,19 +291,174 @@ Vous pouvez modifier un attribut de la manière suivante :
 
 # Listes
 
+Les listes ont l'avantage que ses éléments ne sont pas forcément du même type, contrairement aux vecteurs.
+Pour créer un vecteur on utilise la fonction `list` :
+```{r}
+> maliste <- list(c("A","B","C","A"),matrix(1:4),1,2L, "D")
+> maliste
+[[1]]
+[1] "A" "B" "C" "A"
+
+[[2]]
+     [,1]
+[1,]    1
+[2,]    2
+[3,]    3
+[4,]    4
+
+[[3]]
+[1] 1
+
+[[4]]
+[1] 2
+
+[[5]]
+[1] "D"
+```
+
+On peut connaître sa longueur à l'aide de `length` :
+```{r}
+> length(maliste)
+[1] 5
+```
+
+On peut vérifier si un objet est une liste à l'aide de `is.list` :
+```{r}
+> is.list(maliste)
+[1] TRUE
+```
+
+On peut concatener deux listes ainsi:
+```{r}
+> c(list(1,4),list(2))
+[[1]]
+[1] 1
+
+[[2]]
+[1] 4
+
+[[3]]
+[1] 2
+```
+
+
 # Data frame
+
+Liste nommée de vecteurs de même longueur.
+
+Pour mieux appréhender les "data frame", on peut considérer cet exemple:
+```{r}
+df <- mtcars
+df$cyl[1] <-12
+```
+
+Considérons:
+```{r}
+df$cyl
+```
+qui permet "d'extraire" la colonne cyl de `df`. L'opération suivante:
+
+```{r}
+df$cyl[1] <-12
+```
+permet de modifier le premier élément de `df$cyl`.
+
+Notez que cela modifie également `df`.
 
 # Call by value
 
 # Metaprogramming
 
+```{r}
+library(purrr)
+library(rlang)
+
+X_1 = 3
+X_2 = 4
+X_3 = 5
+
+my_sum <- function(prefix, min, max) {
+  prefix <- enexpr(prefix)
+  var_names <- paste0(prefix, "_", min:max)
+  values <- map_dbl(var_names, function(name) get(name))
+  sum(values)
+}
+
+my_sum(X, min = 1, max = 3)
+```
+
 # Copy on modify (data.frame)
- 
+
+```{r}
+> ref(mtcars)
+> mtcars$cyl[1] <- 12
+> ref(mtcars)
+```
+
+À l'éxecution de ces lignes on peut voir que seule la colonne `mpg` a son adresse modifiée.
+Cela pose un problème puisque si on veut modifier une ligne du "data frame": il y a aura autant de copie que de ligne.
+À la section suivante, on se propose de contourner ce problème. 
+
 # Le package data.table
+
+Dans cette partie nous allons utiliser:
+
+```{r}
+library(lobstr)
+library(data.table)
+library(microbenchmark)
+```
+
+Cette instruction permet de réinitialiser `mtcars`:
+```{r}
+data(mtcars)
+```
+
+Comme vu précédement il y a modification de l'adresse de `mtcars$cyl`:
+```{r}
+data(mtcars)
+ref(mtcars)
+mtcars$cyl[1] <- 12
+ref(mtcars)
+```
+
+Ici il n'y a pas modification de l'adresse: on utilise le paquet `data.table`:
+```{r}
+data(mtcars)
+df <-  as.data.table(mtcars)
+ref(df)
+df[1, cyl := 12]
+ref(df)
+```
+
+
+```{r}
+data(mtcars)
+
+X <- mtcars
+Y <- as.data.table(mtcars)
+
+# on effectue une centaine d'opérations pour comparer
+foo_trad <- function() {
+  for(i in 1:100) X[1,1] <- i
+}
+
+foo_data.table <- function() {
+  for(i in 1:100)  Y[1, mpg := i]
+}
+
+microbenchmark(foo_trad(),foo_data.table())
+```
+
+En testant cela, et en faisant changeant 100 pour 1000, on voit que l'utilisation du package data.table a un coût de base, mais pour un grand nombre d'opération, on a un gain de temps.
+
+Il faut noter que l'utilisation de data.table n'est pas standard, elle n'est pas présente par défaut dans R.
 
 # Microbenchmark
 
 Nous allons utiliser le package `microbenchmark`.
 
 Il vous faut l'installer, puis le charger en début de session.
+
+On peut voir un exemple d'utilisation dans la partie précédente.
 

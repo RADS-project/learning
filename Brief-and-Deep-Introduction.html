@@ -1269,26 +1269,127 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <div id="listes" class="section level1">
 <h1>Listes</h1>
+<p>Les listes ont l’avantage que ses éléments ne sont pas forcément du même type, contrairement aux vecteurs. Pour créer un vecteur on utilise la fonction <code>list</code> :</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="op">&gt;</span><span class="st"> </span>maliste &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;A&quot;</span>),<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>),<span class="dv">1</span>,2L, <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="op">&gt;</span><span class="st"> </span>maliste</span>
+<span id="cb23-3"><a href="#cb23-3"></a>[[<span class="dv">1</span>]]</span>
+<span id="cb23-4"><a href="#cb23-4"></a>[<span class="dv">1</span>] <span class="st">&quot;A&quot;</span> <span class="st">&quot;B&quot;</span> <span class="st">&quot;C&quot;</span> <span class="st">&quot;A&quot;</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a></span>
+<span id="cb23-6"><a href="#cb23-6"></a>[[<span class="dv">2</span>]]</span>
+<span id="cb23-7"><a href="#cb23-7"></a>     [,<span class="dv">1</span>]</span>
+<span id="cb23-8"><a href="#cb23-8"></a>[<span class="dv">1</span>,]    <span class="dv">1</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a>[<span class="dv">2</span>,]    <span class="dv">2</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a>[<span class="dv">3</span>,]    <span class="dv">3</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a>[<span class="dv">4</span>,]    <span class="dv">4</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a></span>
+<span id="cb23-13"><a href="#cb23-13"></a>[[<span class="dv">3</span>]]</span>
+<span id="cb23-14"><a href="#cb23-14"></a>[<span class="dv">1</span>] <span class="dv">1</span></span>
+<span id="cb23-15"><a href="#cb23-15"></a></span>
+<span id="cb23-16"><a href="#cb23-16"></a>[[<span class="dv">4</span>]]</span>
+<span id="cb23-17"><a href="#cb23-17"></a>[<span class="dv">1</span>] <span class="dv">2</span></span>
+<span id="cb23-18"><a href="#cb23-18"></a></span>
+<span id="cb23-19"><a href="#cb23-19"></a>[[<span class="dv">5</span>]]</span>
+<span id="cb23-20"><a href="#cb23-20"></a>[<span class="dv">1</span>] <span class="st">&quot;D&quot;</span></span></code></pre></div>
+<p>On peut connaître sa longueur à l’aide de <code>length</code> :</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">length</span>(maliste)</span>
+<span id="cb24-2"><a href="#cb24-2"></a>[<span class="dv">1</span>] <span class="dv">5</span></span></code></pre></div>
+<p>On peut vérifier si un objet est une liste à l’aide de <code>is.list</code> :</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">is.list</span>(maliste)</span>
+<span id="cb25-2"><a href="#cb25-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span></span></code></pre></div>
+<p>On peut concatener deux listes ainsi:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="kw">list</span>(<span class="dv">1</span>,<span class="dv">4</span>),<span class="kw">list</span>(<span class="dv">2</span>))</span>
+<span id="cb26-2"><a href="#cb26-2"></a>[[<span class="dv">1</span>]]</span>
+<span id="cb26-3"><a href="#cb26-3"></a>[<span class="dv">1</span>] <span class="dv">1</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a></span>
+<span id="cb26-5"><a href="#cb26-5"></a>[[<span class="dv">2</span>]]</span>
+<span id="cb26-6"><a href="#cb26-6"></a>[<span class="dv">1</span>] <span class="dv">4</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a></span>
+<span id="cb26-8"><a href="#cb26-8"></a>[[<span class="dv">3</span>]]</span>
+<span id="cb26-9"><a href="#cb26-9"></a>[<span class="dv">1</span>] <span class="dv">2</span></span></code></pre></div>
 </div>
 <div id="data-frame" class="section level1">
 <h1>Data frame</h1>
+<p>Liste nommée de vecteurs de même longueur.</p>
+<p>Pour mieux appréhender les “data frame”, on peut considérer cet exemple:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>df &lt;-<span class="st"> </span>mtcars</span>
+<span id="cb27-2"><a href="#cb27-2"></a>df<span class="op">$</span>cyl[<span class="dv">1</span>] &lt;-<span class="dv">12</span></span></code></pre></div>
+<p>Considérons:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>df<span class="op">$</span>cyl</span></code></pre></div>
+<p>qui permet “d’extraire” la colonne cyl de <code>df</code>. L’opération suivante:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>df<span class="op">$</span>cyl[<span class="dv">1</span>] &lt;-<span class="dv">12</span></span></code></pre></div>
+<p>permet de modifier le premier élément de <code>df$cyl</code>.</p>
+<p>Notez que cela modifie également <code>df</code>.</p>
 </div>
 <div id="call-by-value" class="section level1">
 <h1>Call by value</h1>
 </div>
 <div id="metaprogramming" class="section level1">
 <h1>Metaprogramming</h1>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">library</span>(purrr)</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="kw">library</span>(rlang)</span>
+<span id="cb30-3"><a href="#cb30-3"></a></span>
+<span id="cb30-4"><a href="#cb30-4"></a>X_<span class="dv">1</span> =<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a>X_<span class="dv">2</span> =<span class="st"> </span><span class="dv">4</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>X_<span class="dv">3</span> =<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a></span>
+<span id="cb30-8"><a href="#cb30-8"></a>my_sum &lt;-<span class="st"> </span><span class="cf">function</span>(prefix, min, max) {</span>
+<span id="cb30-9"><a href="#cb30-9"></a>  prefix &lt;-<span class="st"> </span><span class="kw">enexpr</span>(prefix)</span>
+<span id="cb30-10"><a href="#cb30-10"></a>  var_names &lt;-<span class="st"> </span><span class="kw">paste0</span>(prefix, <span class="st">&quot;_&quot;</span>, min<span class="op">:</span>max)</span>
+<span id="cb30-11"><a href="#cb30-11"></a>  values &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(var_names, <span class="cf">function</span>(name) <span class="kw">get</span>(name))</span>
+<span id="cb30-12"><a href="#cb30-12"></a>  <span class="kw">sum</span>(values)</span>
+<span id="cb30-13"><a href="#cb30-13"></a>}</span>
+<span id="cb30-14"><a href="#cb30-14"></a></span>
+<span id="cb30-15"><a href="#cb30-15"></a><span class="kw">my_sum</span>(X, <span class="dt">min =</span> <span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">3</span>)</span></code></pre></div>
 </div>
 <div id="copy-on-modify-data.frame" class="section level1">
 <h1>Copy on modify (data.frame)</h1>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">ref</span>(mtcars)</span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="op">&gt;</span><span class="st"> </span>mtcars<span class="op">$</span>cyl[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">12</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">ref</span>(mtcars)</span></code></pre></div>
+<p>À l’éxecution de ces lignes on peut voir que seule la colonne <code>mpg</code> a son adresse modifiée. Cela pose un problème puisque si on veut modifier une ligne du “data frame”: il y a aura autant de copie que de ligne. À la section suivante, on se propose de contourner ce problème.</p>
 </div>
 <div id="le-package-data.table" class="section level1">
 <h1>Le package data.table</h1>
+<p>Dans cette partie nous allons utiliser:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">library</span>(lobstr)</span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="kw">library</span>(data.table)</span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="kw">library</span>(microbenchmark)</span></code></pre></div>
+<p>Cette instruction permet de réinitialiser <code>mtcars</code>:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">data</span>(mtcars)</span></code></pre></div>
+<p>Comme vu précédement il y a modification de l’adresse de <code>mtcars$cyl</code>:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">data</span>(mtcars)</span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="kw">ref</span>(mtcars)</span>
+<span id="cb34-3"><a href="#cb34-3"></a>mtcars<span class="op">$</span>cyl[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">12</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="kw">ref</span>(mtcars)</span></code></pre></div>
+<p>Ici il n’y a pas modification de l’adresse: on utilise le paquet <code>data.table</code>:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="kw">data</span>(mtcars)</span>
+<span id="cb35-2"><a href="#cb35-2"></a>df &lt;-<span class="st">  </span><span class="kw">as.data.table</span>(mtcars)</span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="kw">ref</span>(df)</span>
+<span id="cb35-4"><a href="#cb35-4"></a>df[<span class="dv">1</span>, cyl <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">12</span>]</span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="kw">ref</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">data</span>(mtcars)</span>
+<span id="cb36-2"><a href="#cb36-2"></a></span>
+<span id="cb36-3"><a href="#cb36-3"></a>X &lt;-<span class="st"> </span>mtcars</span>
+<span id="cb36-4"><a href="#cb36-4"></a>Y &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(mtcars)</span>
+<span id="cb36-5"><a href="#cb36-5"></a></span>
+<span id="cb36-6"><a href="#cb36-6"></a><span class="co"># on effectue une centaine d&#39;opérations pour comparer</span></span>
+<span id="cb36-7"><a href="#cb36-7"></a>foo_trad &lt;-<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb36-8"><a href="#cb36-8"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) X[<span class="dv">1</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span>i</span>
+<span id="cb36-9"><a href="#cb36-9"></a>}</span>
+<span id="cb36-10"><a href="#cb36-10"></a></span>
+<span id="cb36-11"><a href="#cb36-11"></a>foo_data.table &lt;-<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb36-12"><a href="#cb36-12"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)  Y[<span class="dv">1</span>, mpg <span class="op">:</span><span class="er">=</span><span class="st"> </span>i]</span>
+<span id="cb36-13"><a href="#cb36-13"></a>}</span>
+<span id="cb36-14"><a href="#cb36-14"></a></span>
+<span id="cb36-15"><a href="#cb36-15"></a><span class="kw">microbenchmark</span>(<span class="kw">foo_trad</span>(),<span class="kw">foo_data.table</span>())</span></code></pre></div>
+<p>En testant cela, et en faisant changeant 100 pour 1000, on voit que l’utilisation du package data.table a un coût de base, mais pour un grand nombre d’opération, on a un gain de temps.</p>
+<p>Il faut noter que l’utilisation de data.table n’est pas standard, elle n’est pas présente par défaut dans R.</p>
 </div>
 <div id="microbenchmark" class="section level1">
 <h1>Microbenchmark</h1>
 <p>Nous allons utiliser le package <code>microbenchmark</code>.</p>
 <p>Il vous faut l’installer, puis le charger en début de session.</p>
+<p>On peut voir un exemple d’utilisation dans la partie précédente.</p>
 </div>
 	  </div>
 
