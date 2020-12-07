@@ -6,4 +6,4 @@ output: rmdformats::material
 
 # Index
 
-* [R: A Deep and Brief Introduction](/Brief-and-Deep-Introduction.html)
+* [R: A Deep and Brief Introduction](./Brief-and-Deep-Introduction.html)
