@@ -1,0 +1,54 @@
+---
+title: "R: Création de package"
+date: "17/12/2020"
+output: rmdformats::material
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+# Package `devtools`
+
+Pour l'utiliser:
+```{r}
+> install.packages("devtools")
+```
+
+Pour l'importer:
+```{r}
+> library(devtools)
+```
+
+# Commandes de bases:
+
+Pour créer le package `calendr` dans le répertoire "./calendr"
+```{r}
+> create_package("./calendr", open = F)
+```
+
+l' `open = F` permet uniquement de ne pas rouvrir une instance RStudio
+
+Une fois dans le dossier "calendr", cette fonction permet de créer un fichier `seq_date.R` dans le sous-dossier "R"
+```{r}
+> use_r("seq_date")
+```
+
+Permet d'ajouter `lubridate` dans les dépendances:
+```{r}
+> use_package("lubridate")
+```
+
+Permet d'ajouter un test pour le fichier courant:
+```{r}
+> use_test()
+```
+
+# Raccourcis clavier
+
+* `CTRL + SHIFT + L`: permet de charger en mémoire les fonctions du fichier
+* `CTRL + SHIFT + T`: permet de lancer un test
+
+# Exemple
+
+Un exemple à [cette adresse](https://github.com/RADS-project/learning/tree/main/exemples/calendr).
