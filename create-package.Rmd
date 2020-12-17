@@ -51,4 +51,4 @@ Permet d'ajouter un test pour le fichier courant:
 
 # Exemple
 
-Un exemple à [cette adresse](https://github.com/RADS-project/learning/tree/main/exemples/calendr).
+Un exemple à [cette adresse](https://github.com/RADS-project/learning/tree/master/exemples/calendr).
