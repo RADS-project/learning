@@ -8,3 +8,4 @@ output: rmdformats::material
 
 * [R: A Deep and Brief Introduction](./Brief-and-Deep-Introduction.html)
 * [R: Création de package](./create-package.html)
+* [R: Utiliser Visual Studio Code](./use-vscode.html)

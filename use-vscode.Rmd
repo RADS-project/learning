@@ -1,0 +1,53 @@
+---
+title: "R: Utiliser Visual Studio Code"
+date: "11/04/2021"
+output: rmdformats::material
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+# Extensions de Visual Studio Code pour *R*
+
+Installez les extensions suivantes:
+
+*  [R](https://marketplace.visualstudio.com/items?itemName=Ikuyadeu.r)  
+*  [R Debugger](https://marketplace.visualstudio.com/items?itemName=RDebugger.r-debugger)  
+*  [R LSP Client](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r-lsp)  
+*  [R Tools](https://marketplace.visualstudio.com/items?itemName=Mikhail-Arkhipov.r)  
+
+Pour faire fonctionner ces extensions il faut installer les librairies R (via R Studio):
+```{r}
+install.packages("languageserver")
+```
+Et: 
+```{r}
+devtools::install_github("ManuelHentschel/vscDebugger")
+```
+
+**Note**: Si vous rencontrez des problèmes pour l'installation de `vscDebugger `, utilisez le binaire disponible [ici](https://github.com/ManuelHentschel/vscDebugger/releases). 
+
+D'autres erreurs peuvent avoir lieu lors de l'installation dépendament de l'état de votre système à l'installation.
+
+# radian
+
+[radian](https://github.com/randy3k/radian) est une console pour R très intéressante.
+
+Installez radian: `pip install -U radian` et executez le: `radian`
+
+Pour l'installer il faut python, [veuillez à bien définir le *path* une fois Python installé notamment sous Windows](https://www.datacamp.com/community/tutorials/installing-anaconda-windows).
+
+Sous Windows il faut ajouter au *path* (à adapter, voir lien précédent):
+
+*  (...)/Anaconda3
+*  (...)/Anaconda3/Scripts
+*  (...)/Anaconda3/Library/bin 
+
+Erreur avec pip: [Stack-Overflow](https://stackoverflow.com/a/54897379/6579059)
+
+# Extension de Live Share
+
+[Live Share](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack) est l'extension à installer à tout prix. Elle permet de faire du pair programming.
+
+Dans le futur on pourra même [l'utiliser en ligne](https://docs.microsoft.com/en-us/visualstudio/liveshare/quickstart/browser-join).
