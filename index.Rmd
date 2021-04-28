@@ -1,5 +1,5 @@
 ---
-title: "RADS Project"
+title: "AnalysR - Learning"
 date: "07/12/2020"
 output: rmdformats::material
 ---
@@ -9,3 +9,37 @@ output: rmdformats::material
 * [R: A Deep and Brief Introduction](./Brief-and-Deep-Introduction.html)
 * [R: Création de package](./create-package.html)
 * [R: Utiliser Visual Studio Code](./use-vscode.html)
+
+## Commands
+
+### Test
+
+```
+devtools::test()
+```
+or CTRL+SHIFT+T in RStudio
+
+
+### Load package 
+
+```
+devtools::load_all(".")
+```
+or CTRL+SHIFT+L in RStudio
+
+### Build
+
+```
+devtools::build()
+```
+
+### Documentation
+
+```
+ devtools::document()
+```
+or CTRL+SHIFT+D in RStudio
+
+### To reload R 
+
+CTRL+SHIFT+F10 in RStudio
