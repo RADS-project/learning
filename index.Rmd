@@ -14,7 +14,7 @@ output: rmdformats::material
 
 ### Test
 
-```
+```{r}
 devtools::test()
 ```
 or CTRL+SHIFT+T in RStudio
@@ -22,24 +22,30 @@ or CTRL+SHIFT+T in RStudio
 
 ### Load package 
 
-```
+```{r}
 devtools::load_all(".")
 ```
 or CTRL+SHIFT+L in RStudio
 
 ### Build
 
-```
+```{r}
 devtools::build()
 ```
 
 ### Documentation
 
-```
- devtools::document()
+```{r}
+devtools::document()
 ```
 or CTRL+SHIFT+D in RStudio
 
 ### To reload R 
 
 CTRL+SHIFT+F10 in RStudio
+
+### To write CSV for test
+
+```{r}
+write.csv(analysr_env$descriptions, "after-descriptions.csv", row.names = FALSE)
+```
